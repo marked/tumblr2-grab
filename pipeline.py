@@ -85,15 +85,19 @@ class CheckIP(SimpleTask):
         if self._counter <= 0:
             item.log_output('Checking IP address.')
             ip_set = set()
+            dns_test_names = [
+              'twitter.com',
+              'facebook.com',
+              'youtube.com',
+              'microsoft.com',
+              'icanhas.cheezburger.com',
+              'archiveteam.org'
+            ]
+            
+            for hostname in dns_testnames:
+                ip_set.add(socket.gethostbyname(hostname))
 
-            ip_set.add(socket.gethostbyname('twitter.com'))
-            ip_set.add(socket.gethostbyname('facebook.com'))
-            ip_set.add(socket.gethostbyname('youtube.com'))
-            ip_set.add(socket.gethostbyname('microsoft.com'))
-            ip_set.add(socket.gethostbyname('icanhas.cheezburger.com'))
-            ip_set.add(socket.gethostbyname('archiveteam.org'))
-
-            if len(ip_set) != 6:
+            if len(ip_set) != len(dns_test_names):
                 item.log_output('Got IP addresses: {0}'.format(ip_set))
                 item.log_output(
                     'Are you behind a firewall/proxy? That is a big no-no!')
