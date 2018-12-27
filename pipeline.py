@@ -94,7 +94,7 @@ class CheckIP(SimpleTask):
               'archiveteam.org'
             ]
             
-            for hostname in dns_testnames:
+            for hostname in dns_test_names:
                 ip_set.add(socket.gethostbyname(hostname))
 
             if len(ip_set) != len(dns_test_names):
